@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.mobilist.ListActivity"
+            android:name="com.example.mobilist.MyList"
             android:label="@string/title_activity_list"
             android:parentActivityName="com.droidforhumans.mobilist.MainActivity" >
             <meta-data

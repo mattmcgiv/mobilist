@@ -27,8 +27,8 @@ public class MainActivity extends Activity {
 	
 	/** Called when user touches "Add" button */
 	public void addItem(View view) {
-		// Creates Intent to call the ListActivity
-		Intent intent = new Intent(this, ListActivity.class);
+		// Creates Intent to call the MyList
+		Intent intent = new Intent(this, MyList.class);
 		EditText editText = (EditText) findViewById(R.id.message_add);
 		String message = editText.getText().toString();
 		intent.putExtra(EXTRA_MESSAGE, message);
