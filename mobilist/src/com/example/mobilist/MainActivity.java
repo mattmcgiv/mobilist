@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
 import android.widget.ArrayAdapter;
@@ -22,35 +24,28 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
 		
 		//Create an ArrayList and Add the message to an array
-	    myList.add("a");
-	    myList.add("b");
-	    myList.add("c");
+	    if (myList.isEmpty()) {
+	    	myList.add("There is nothing on your list.");
+	    }
 	    	    
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
-        android.R.layout.simple_list_item_1, myList);
-	   
-	    
-	    //Create a new ListView and pass the adapter into it
-	    ListView listView = new ListView(this);
-	    listView.setAdapter(adapter);
-	    
-	    
-	    //Set the listView as ContentView
-	    setContentView(listView);
+	    updateList();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	    // Inflate the menu items for use in the action bar
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+	    return super.onCreateOptionsMenu(menu);
 	}
 	
 	/** Called when user touches "Add" button */
-	public void addItem(View view) {
+	public void addItem() {
+		myList.add("Added.");
+		updateList();
 		// Creates Intent to call the MyList
 		/*
 		Intent intent = new Intent(this, MyList.class);
@@ -61,5 +56,33 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 		 */
 	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.action_add:
+	            addItem();
+	            return true;
+	        case R.id.action_settings:
+	            //TODO: openSettings();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	public void updateList() {
+		//Create a new ArrayAdapter
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
+				android.R.layout.simple_list_item_1, myList);
+			   
+	   //Create a new ListView and pass the adapter into it
+	   ListView listView = new ListView(this);
+	   listView.setAdapter(adapter);
+		    
+	   //Set the listView as ContentView
+	   setContentView(listView);
+	}
+	
 
 }
