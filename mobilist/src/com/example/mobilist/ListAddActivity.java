@@ -5,13 +5,17 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
+import java.util.ArrayList;
 
 public class ListAddActivity extends Activity {
 
+	//private ArrayList<String> tempList = new ArrayList<String>();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,9 +60,16 @@ public class ListAddActivity extends Activity {
 	
 	public void returnToList(View view) {
 		Intent returnIntent = new Intent();
-		returnIntent.putExtra("result", new String("result"));
+		
+		EditText editText = (EditText) findViewById(R.id.editText1);
+		String message = editText.getText().toString();
+		
+		returnIntent.putExtra("result", message);
 		 setResult(RESULT_OK, returnIntent);     
 		 finish();
 	}
-
+	
+	public void addItem() {
+		return;
+	}
 }

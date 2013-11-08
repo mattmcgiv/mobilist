@@ -10,5 +10,6 @@
     <string name="title_activity_list_add">ListAddActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="button_ok">OK</string>
+    <string name="tempList">Empty</string>
 
 </resources>

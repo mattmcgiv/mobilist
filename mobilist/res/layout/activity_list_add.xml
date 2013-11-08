@@ -4,34 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editText1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/message_add"
-        android:inputType="text" >
+        android:layout_height="wrap_content" >
 
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_add"/>
-
-    <ListView
-        android:id="@+id/listView1"
-        android:layout_width="match_parent"
-        android:layout_height="76dp" >
-
-    </ListView>
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/message_add"
+            android:inputType="text" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_ok"
-        android:onClick="returnToList" />
+        android:onClick="returnToList"
+        android:text="@string/button_ok" />
+
 </LinearLayout>
