@@ -1,10 +1,12 @@
 package com.example.mobilist;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -14,7 +16,8 @@ import android.os.Build;
 @SuppressLint("NewApi")
 public class MyList extends Activity {
 
-
+	private ArrayList<String> myList = new ArrayList<String>();
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -24,15 +27,18 @@ public class MyList extends Activity {
 	    //Save the message into a String called "message"
 	    String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
-	    // Create the text view
-	    TextView textView = new TextView(this);
-	    //Set the size of the text for the list item
-	    textView.setTextSize(40);
-	    //Set the text of the message to the value of the message String
-	    textView.setText(message);
-
-	    // Set the text view as the activity layout
-	    setContentView(textView);
+	    //Create an ArrayList and Add the message to an array
+	    
+	    myList.add((String) message);
+	    
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
+        android.R.layout.simple_list_item_1, myList);
+	   
+	    //Create a new ListView and pass the adapter into it
+	    ListView listView = new ListView(this);
+	    listView.setAdapter(adapter);
+	    //Set the listView as ContentView
+	    setContentView(listView);
 	}
 
 	/**
