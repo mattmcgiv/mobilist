@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,17 +43,9 @@ public class MainActivity extends Activity {
 	public void addItem() {
 		if (myList.contains(getString(R.string.empty_list)))
 			{myList.clear();}
-		myList.add("Added.");
-		updateList();
-		// Creates Intent to call the MyList
-		/*
-		Intent intent = new Intent(this, MyList.class);
-		
-		EditText editText = (EditText) findViewById(R.id.message_add);
-		String message = editText.getText().toString();
-		intent.putExtra(EXTRA_MESSAGE, message);
+		Intent intent = new Intent(this, ListAddActivity.class);
 		startActivity(intent);
-		 */
+		updateList();
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

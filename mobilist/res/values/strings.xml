@@ -7,5 +7,7 @@
     <string name="button_add">Add</string>
     <string name="title_activity_list">list</string>
     <string name="empty_list">There is nothing on your list.</string>
+    <string name="title_activity_list_add">ListAddActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
