@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 		if (myList.contains(getString(R.string.empty_list)))
 			{myList.clear();}
 		Intent intent = new Intent(this, ListAddActivity.class);
-		startActivity(intent);
+		startActivityForResult(intent,1);
 		updateList();
 	}
 	@Override
@@ -74,6 +74,22 @@ public class MainActivity extends Activity {
 	   //Set the listView as ContentView
 	   setContentView(listView);
 	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		  if (requestCode == 1) {
+
+		     if(resultCode == RESULT_OK){      
+		         String result=data.getStringExtra("result");
+		         myList.add(result);
+		         updateList();
+		     }
+		     if (resultCode == RESULT_CANCELED) {    
+		         myList.clear();
+		         myList.add("Error retrieving list from sub-activity.");
+		     }
+		  }
+		}//onActivityResult
 	
 
 }
