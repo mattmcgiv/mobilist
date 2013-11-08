@@ -22,6 +22,7 @@ public class MyList extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 
+	    /*
 	    //Receive the intent
 	    Intent intent = getIntent();
 	    //Save the message into a String called "message"
@@ -38,7 +39,9 @@ public class MyList extends Activity {
 	    ListView listView = new ListView(this);
 	    listView.setAdapter(adapter);
 	    //Set the listView as ContentView
-	    setContentView(listView);
+	    setContentView(listView);*/
+	    
+	    
 	}
 
 	/**
