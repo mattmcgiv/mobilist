@@ -7,12 +7,8 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.content.Intent;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 
 public class MainActivity extends Activity {
@@ -28,7 +24,7 @@ public class MainActivity extends Activity {
 		
 		//Create an ArrayList and Add the message to an array
 	    if (myList.isEmpty()) {
-	    	myList.add("There is nothing on your list.");
+	    	myList.add(getString(R.string.empty_list));
 	    }
 	    	    
 	    updateList();
@@ -44,6 +40,8 @@ public class MainActivity extends Activity {
 	
 	/** Called when user touches "Add" button */
 	public void addItem() {
+		if (myList.contains(getString(R.string.empty_list)))
+			{myList.clear();}
 		myList.add("Added.");
 		updateList();
 		// Creates Intent to call the MyList

@@ -1,22 +1,17 @@
 package com.example.mobilist;
 
-import java.util.ArrayList;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.support.v4.app.NavUtils;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 
 @SuppressLint("NewApi")
 public class MyList extends Activity {
 
-	private ArrayList<String> myList = new ArrayList<String>();
+//	private ArrayList<String> myList = new ArrayList<String>();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
