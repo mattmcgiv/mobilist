@@ -12,10 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-public class MainActivity extends Activity {
-	
-	//public final static String EXTRA_MESSAGE = "com.droidforhumans.mobilist.MESSAGE";
-	
+public class MainActivity extends Activity {	
 	private ArrayList<String> myList = new ArrayList<String>();
 	
 	@Override
