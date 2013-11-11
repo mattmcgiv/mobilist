@@ -8,8 +8,15 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Future;
 
 
 public class MainActivity extends Activity {	
@@ -67,6 +74,26 @@ public class MainActivity extends Activity {
 	   //Create a new ListView and pass the adapter into it
 	   ListView listView = new ListView(this);
 	   listView.setAdapter(adapter);
+	   
+	      
+	   listView.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> adapter, View view, int clickedItem,
+				long arg3) {
+			ArrayAdapter<String> myAdapter = (ArrayAdapter<String>) adapter.getAdapter();
+			String item = getListItem (myAdapter, clickedItem);
+			//String tempItem = new String(item);
+			myAdapter.insert("Item removed.", myAdapter.getPosition(item));
+			
+			//ScheduledThreadPoolExecutor threadPool = new ScheduledThreadPoolExecutor(10);
+			//ScheduledFuture futureState = new ScheduledFuture();
+			//threadPool.schedule((Runnable) new listItemDeleter(myAdapter), 3L, TimeUnit.SECONDS);
+			//threadPool.schedule();
+			
+		}
+	
+	   });
 		    
 	   //Set the listView as ContentView
 	   setContentView(listView);
@@ -88,5 +115,73 @@ public class MainActivity extends Activity {
 		  }
 		}//onActivityResult
 	
+	public String getListItem (ArrayAdapter adapter, int index) {
+		
+		return (String) adapter.getItem(index);
+	}
+	
+	private class listItemDeleter implements Runnable, Future {
+		//This class gets a local copy of the item.
+		ArrayAdapter myAdapter;
+		String item;
+		boolean isCancelled;
 
+		public listItemDeleter (ArrayAdapter myAdapter, String item) {
+			this.item=item;
+			this.myAdapter = myAdapter;
+			this.isCancelled = false;
+		}
+		
+		//Implemented for Runnable
+		public void run() {
+			//TODO: Implement run method
+			myAdapter.remove(item);
+			updateList();
+		}
+		
+		/**Implemented for Future:
+		 * abstract boolean cancel(boolean mayInterruptIfRunning)
+		 * 		-Attempts to cancel execution of this task
+		 */
+		public boolean cancel(boolean mayInterruptIfRunning) {
+			return true;
+		}
+		
+		/**Implemented for Future:
+		 * abstract V get()
+		 * 		-Waits if necessary for the computation to complete, and 
+		 * 		then retrieves its result
+		 */
+		public Object get() {
+			return true;
+		}
+		
+		/**Implemented for Future:
+		 * abstract V get(long timeout, TimeUnit unit)
+		 * 		-Waits if necessary for at most the given time for the
+		 * 		computation to complete, and then retrieves its result,
+		 * 		if available.
+		 */
+		public Object get(long timeout, TimeUnit unit) {
+			return true;
+		}
+		
+		/**Implemented for Future
+		 * abstract boolean isCancelled()
+		 * 		-Returns true if this task was cancelled before it completed
+		 * 		normally.
+		 */
+		public boolean isCancelled(){
+			return true;
+		}
+	
+		/**Implemented for Future:
+		 * abstract boolean isDone()
+		 * 		-Returns true if this task completed. 
+		 */
+		public boolean isDone() {	
+			return true;
+		}
+		
+	}
 }

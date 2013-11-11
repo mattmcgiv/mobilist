@@ -1,27 +1,45 @@
 package com.example.mobilist;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import java.util.ArrayList;
 
 public class ListAddActivity extends Activity {
 
-	//private ArrayList<String> tempList = new ArrayList<String>();
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_add);
 		// Show the Up button in the action bar.
-		setupActionBar();		
+		setupActionBar();
+		
+		//textView.requestFocus();
+		(new Handler()).postDelayed(new Runnable() {
+
+            public void run() {
+//              ((EditText) findViewById(R.id.et_find)).requestFocus();
+//              
+                
+//              InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//              imm.showSoftInput(yourEditText, InputMethodManager.SHOW_IMPLICIT);
+            	EditText textView = (EditText) findViewById(R.id.editText1);
+                textView.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN , 0, 0, 0));
+                textView.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP , 0, 0, 0));                       
+
+            }
+        }, 200);
 	}
 
 	/**
