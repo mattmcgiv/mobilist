@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.concurrent.Delayed;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -86,10 +87,10 @@ public class MainActivity extends Activity {
 			//String tempItem = new String(item);
 			myAdapter.insert("Item removed.", myAdapter.getPosition(item));
 			
-			//ScheduledThreadPoolExecutor threadPool = new ScheduledThreadPoolExecutor(10);
+			ScheduledThreadPoolExecutor threadPool = new ScheduledThreadPoolExecutor(10);
 			//ScheduledFuture futureState = new ScheduledFuture();
-			//threadPool.schedule((Runnable) new listItemDeleter(myAdapter), 3L, TimeUnit.SECONDS);
-			//threadPool.schedule();
+			ScheduledFuture<ListItemDeleter> myListItemDeleter = new ListItemDeleter(myAdapter,item);
+			myListItemDeleter = (ScheduledFuture<ListItemDeleter>)threadPool.schedule((Runnable) myListItemDeleter, 3L, TimeUnit.SECONDS);
 			
 		}
 	
@@ -120,23 +121,25 @@ public class MainActivity extends Activity {
 		return (String) adapter.getItem(index);
 	}
 	
-	private class listItemDeleter implements Runnable, Future {
+	private class ListItemDeleter implements Runnable, ScheduledFuture {
 		//This class gets a local copy of the item.
 		ArrayAdapter myAdapter;
 		String item;
 		boolean isCancelled;
 
-		public listItemDeleter (ArrayAdapter myAdapter, String item) {
+		public ListItemDeleter (ArrayAdapter myAdapter, String item) {
 			this.item=item;
 			this.myAdapter = myAdapter;
 			this.isCancelled = false;
+			run();
 		}
 		
 		//Implemented for Runnable
 		public void run() {
 			//TODO: Implement run method
-			myAdapter.remove(item);
+			myAdapter.remove(this.item);
 			updateList();
+			//finish();
 		}
 		
 		/**Implemented for Future:
@@ -183,5 +186,14 @@ public class MainActivity extends Activity {
 			return true;
 		}
 		
+		public long getDelay (TimeUnit unit) {
+			return 3L;
+		}
+
+		@Override
+		public int compareTo(Delayed comparator) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	}
 }
